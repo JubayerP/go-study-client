@@ -4,7 +4,7 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import toast from 'react-hot-toast';
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUsersProfile } = useContext(AuthContext);
 
   const [userInfo, setUserInfo] = useState({
     fullName: "",
@@ -61,6 +61,9 @@ const Register = () => {
             color: "#fff",
           },
         });
+        updateUsersProfile(userInfo.fullName, userInfo.photoURL)
+          .then(() => { })
+        .catch(error => {console.log(error.message)})
       })
       .catch((e) => {
         console.log(e.message);
