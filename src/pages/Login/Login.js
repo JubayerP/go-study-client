@@ -1,19 +1,22 @@
-import React, { useState, useContext } from "react";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
+import { AiFillGithub, AiFillGoogleCircle } from "react-icons/ai";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AiFillGoogleCircle, AiFillGithub } from "react-icons/ai";
-import { AuthContext } from '../../contexts/AuthProvider'
-import toast from 'react-hot-toast';
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { signIn } = useContext(AuthContext);
+  const { signIn, providerLogin } = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
   });
-
-  const from = location.state?.from?.pathname || '/';
+  
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
+  const from = location.state?.from?.pathname || "/";
 
   const handleEmailChange = (e) => {
     setUserInfo({ ...userInfo, email: e.target.value });
@@ -25,13 +28,60 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     signIn(userInfo.email, userInfo.password)
+      .then((result) => {
+        navigate(from, { replace: true });
+        toast.success("You are Logged In!", {
+          style: {
+            borderRadius: "10px",
+            background: "#333333",
+            color: "#fff",
+          },
+        });
+      })
+      .catch((e) => {
+        console.log(e.message);
+        toast.error(e.message, {
+          style: {
+            borderRadius: "10px",
+            background: "#ED4337",
+            color: "#FFF",
+          },
+        });
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    providerLogin(googleProvider)
+      .then((result) => {
+        navigate(from, { replace: true });
+        toast.success("You are Logged In!", {
+          style: {
+            borderRadius: "10px",
+            background: "#333333",
+            color: "#fff",
+          },
+        });
+      })
+      .catch((e) => {
+        console.log(e.message);
+        toast.error(e.message, {
+          style: {
+            borderRadius: "10px",
+            background: "#ED4337",
+            color: "#FFF",
+          },
+        });
+      });
+  };
+
+  const handleGithubSignIn = () => {
+    providerLogin(githubProvider)
     .then((result) => {
-      const user = result.user;
-      navigate(from, {replace: true})
+      navigate(from, { replace: true });
       toast.success("You are Logged In!", {
         style: {
           borderRadius: "10px",
-          background: "#333",
+          background: "#333333",
           color: "#fff",
         },
       });
@@ -40,13 +90,13 @@ const Login = () => {
       console.log(e.message);
       toast.error(e.message, {
         style: {
-          borderRadius: '10px',
-          background: '#ED4337',
-          color: '#FFF'
-        }
-      })
+          borderRadius: "10px",
+          background: "#ED4337",
+          color: "#FFF",
+        },
+      });
     });
-  };
+  }
 
   return (
     <div>
@@ -103,12 +153,12 @@ const Login = () => {
       </div>
 
       <div className="flex justify-center">
-        <button className="flex justify-center items-center w-[80vh] mt-3 py-2.5 font-semibold border border-[#ff1f59] hover:bg-[#ff1f59] hover:text-white duration-100">
+        <button onClick={handleGoogleSignIn} className="flex justify-center items-center w-[80vh] mt-3 py-2.5 font-semibold border border-[#ff1f59] hover:bg-[#ff1f59] hover:text-white duration-100">
           <AiFillGoogleCircle size={20} className="mr-2" /> Continue With Google
         </button>
       </div>
       <div className="flex justify-center">
-        <button className="flex justify-center items-center w-[80vh] mt-3 py-2.5 font-semibold border border-[#ff1f59] hover:bg-[#ff1f59] hover:text-white duration-100">
+        <button onClick={handleGithubSignIn} className="flex justify-center items-center w-[80vh] mt-3 py-2.5 font-semibold border border-[#ff1f59] hover:bg-[#ff1f59] hover:text-white duration-100">
           <AiFillGithub size={20} className="mr-2" /> Continue With Github
         </button>
       </div>
