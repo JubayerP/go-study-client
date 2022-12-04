@@ -3,6 +3,7 @@ import Main from "../../layouts/Main";
 import CheckOut from "../../pages/CheckOut/CheckOut";
 import CourseDetail from "../../pages/CourseDetail/CourseDetail";
 import Courses from "../../pages/Courses/Courses";
+import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import Register from "../../pages/Register/Register";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
@@ -12,6 +13,14 @@ export const router = createBrowserRouter([
         path: '/',
         element: <Main />,
         children: [
+            {
+                path: '/',
+                element: <Home />
+            },
+            {
+                path: '/home',
+                element: <Home />
+            },
             {
                 path: '/login',
                 element: <Login />
