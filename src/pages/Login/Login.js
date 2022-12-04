@@ -4,7 +4,6 @@ import { AiFillGoogleCircle, AiFillGithub } from 'react-icons/ai';
 
 const Login = () => {
   return (
-    <div className="">
       <div>
         <h3 className="text-3xl font-semibold text-center">Login</h3>
 
@@ -44,7 +43,6 @@ const Login = () => {
               <div className="flex justify-center"><button className="flex justify-center items-center w-[80vh] mt-3 py-2.5 font-semibold border border-[#ff1f59] hover:bg-[#ff1f59] hover:text-white duration-100"><AiFillGoogleCircle size={20} className='mr-2'/> Continue With Google</button></div>
               <div className="flex justify-center"><button className="flex justify-center items-center w-[80vh] mt-3 py-2.5 font-semibold border border-[#ff1f59] hover:bg-[#ff1f59] hover:text-white duration-100"><AiFillGithub size={20} className='mr-2'/> Continue With Github</button></div>
       </div>
-    </div>
   );
 };
 
