@@ -4,9 +4,9 @@ import sign from "../../assets/sign.jpeg";
 
 const SignUpCard = () => {
   return (
-    <div className="my-20 flex items-center justify-around w-11/12 mx-auto rounded p-4 bg-[#F8FAFF]">
+    <div className="my-20 flex flex-col md:flex-row items-center justify-around w-11/12 mx-auto rounded p-4 bg-[#F8FAFF] space-y-10">
       <img src={sign} alt="" />
-      <div className="w-1/2">
+      <div className="md:w-1/2">
         <h2 className="text-4xl font-medium leading-tight">
           Start today and get certified in Fundamentals of digital marketing
         </h2>
