@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 const Course = ({ course }) => {
   console.log(course);
-  const { id, name, image, desc, price, duration } = course;
+  const { id, name, image, price, duration } = course;
   return (
-    <div className="border">
+    <div className="border w-[80%] sm:w-[80%] md:w-full mx-auto">
       <img className="rounded" src={image} alt="courseImage" />
       <div className="p-3">
         <div className="flex items-center space-x-1">

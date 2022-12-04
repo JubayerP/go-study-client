@@ -9,17 +9,16 @@ const LeftSideNav = () => {
       .then((data) => setCategories(data));
   }, []);
   return (
-    <div className="flex flex-col h-screen bg-gray-300 px-3 py-6 space-y-8 rounded">
+    <div className="md:flex md:flex-col md:h-screen px-3 py-6 md:space-y-8 rounded mx-auto sm:w-full grid md:grid-cols-3 grid-cols-2">
       {categories.map((categorie) => (
         <Link
           key={categorie.category_id}
-          className="p-2 rounded hover:bg-slate-100"
+          className="p-2 rounded bg-slate-50 hover:bg-slate-100 m-2"
           to={`${categorie.category_id}`}
         >
           {categorie.category_name}
         </Link>
       ))}
-      <Outlet />
     </div>
   );
 };
