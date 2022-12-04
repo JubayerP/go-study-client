@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import logo from "../../assets/logo.png";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Header = () => {
   const [isDarkMode, setDarkMode] = useState(false);
+  const { user } = useContext(AuthContext);
+  console.log(user);
 
   const toggleDarkMode = (checked) => {
     setDarkMode(checked);

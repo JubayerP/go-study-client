@@ -1,20 +1,93 @@
-import React from "react";
-import { AiFillGithub, AiFillGoogleCircle } from "react-icons/ai";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
+import toast from 'react-hot-toast';
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
+
+  const [userInfo, setUserInfo] = useState({
+    fullName: "",
+    photoURL: "",
+    email: "",
+    password: "",
+  });
+
+  const [erros, setErrors] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleFullNameChange = (e) => {
+    setUserInfo({ ...userInfo, fullName: e.target.value });
+  };
+
+  const handlePhotoURLChange = (e) => {
+    setUserInfo({ ...userInfo, photoURL: e.target.value });
+  };
+
+  const handleEmailChange = (e) => {
+    const email = e.target.value;
+    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      setErrors({ ...erros, email: "Provide a valid email" });
+      setUserInfo({ ...userInfo, email: e.target.value });
+    } else {
+      setErrors({ ...erros, email: "" });
+      setUserInfo({ ...userInfo, email: e.target.value });
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    const password = e.target.value;
+    if (password.length < 8) {
+      setErrors({ ...erros, password: "Must be at least 8 characters" });
+      setUserInfo({ ...userInfo, password: e.target.value });
+    } else {
+      setErrors({ ...erros, password: "" });
+      setUserInfo({ ...userInfo, password: e.target.value });
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createUser(userInfo.email, userInfo.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success("You are registerd!", {
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+      })
+      .catch((e) => {
+        console.log(e.message);
+        toast.error(e.message, {
+          style: {
+            borderRadius: '10px',
+            background: '#ED4337',
+            color: '#FFF'
+          }
+        })
+      });
+  };
+
   return (
-    <div>
+    <div className="mb-4">
       <h3 className="text-3xl font-semibold text-center">Register</h3>
 
-      <form className="flex justify-center flex-col items-center">
+      <form onSubmit={handleSubmit} className="flex flex-col items-center">
         <div className="space-y-3 mb-6">
           <label className="block" htmlFor="name">
             Full Name
           </label>
           <input
-            className="w-[80vh] px-2 py-2.5 border outline-gray-700"
+            className=" px-2 py-2.5 border outline-gray-700 w-[400px]"
             type="text"
+            value={userInfo.fullName}
+            onChange={handleFullNameChange}
             placeholder="Full Name"
             required
           />
@@ -24,7 +97,9 @@ const Register = () => {
             Photo URL
           </label>
           <input
-            className="w-[80vh] px-2 py-2.5 border outline-gray-700"
+            onChange={handlePhotoURLChange}
+            value={userInfo.photoURL}
+            className=" px-2 py-2.5 border outline-gray-700 w-[400px]"
             type="text"
             placeholder="Photo URL"
             required
@@ -35,26 +110,32 @@ const Register = () => {
             Email
           </label>
           <input
-            className="w-[80vh] px-2 py-2.5 border outline-gray-700"
+            onChange={handleEmailChange}
+            value={userInfo.email}
+            className=" px-2 py-2.5 border outline-gray-700 w-[400px]"
             type="email"
             placeholder="email"
             required
           />
+          <p className="text-red-500">{erros.email}</p>
         </div>
         <div className="space-y-3">
           <label className="block" htmlFor="password">
             Password
           </label>
           <input
-            className="w-[80vh] px-2 py-2.5 border outline-gray-700"
+            onChange={handlePasswordChange}
+            value={userInfo.password}
+            className=" px-2 py-2.5 border outline-gray-700 w-[400px]"
             type="password"
             placeholder="password"
             required
           />
+          <p className="text-red-500">{erros.password}</p>
         </div>
         <button
           type="submit"
-          className="bg-[#FF1F59] w-[80vh] mt-3 py-2.5 text-white font-semibold"
+          className="bg-[#FF1F59] mt-3 py-2.5 text-white font-semibold w-[400px]"
         >
           Register
         </button>
