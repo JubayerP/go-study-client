@@ -60,7 +60,7 @@ const Register = () => {
         </button>
       </form>
       <p className="text-center mt-2">
-        New to Go Study?{" "}
+        Already have an account?{" "}
         <Link className="text-[#ff1f59]" to="/login">
           Login
         </Link>
