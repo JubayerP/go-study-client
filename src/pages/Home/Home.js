@@ -4,6 +4,7 @@ import { BsCheck2 } from "react-icons/bs";
 import home from "../../assets/home.png";
 import Skills from "../Skills/Skills";
 import SignUpCard from "../SignUpCard/SignUpCard";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
   return (
@@ -44,6 +45,9 @@ const Home = () => {
 
       {/* Sign Up Card */}
       <SignUpCard />
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
