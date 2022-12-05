@@ -1,14 +1,13 @@
 import React from "react";
 import { BiTimer } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import ReactImageMagnify from 'react-image-magnify';
 
 const Course = ({ course }) => {
   console.log(course);
   const { id, name, image, price, duration } = course;
   return (
     <div className="border w-[80%] sm:w-[80%] md:w-full mx-auto">
-      <img className="rounded w-[380px] h-[228px]" src={image} alt="courseImage" />
+      <img className="rounded md:w-[380px] md:h-[228px]" src={image} alt="courseImage" />
       <div className="p-3">
         <div className="flex items-center space-x-1">
           <BiTimer size={20} />

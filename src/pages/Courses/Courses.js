@@ -11,7 +11,7 @@ const Courses = () => {
       <div className="grid md:grid-cols-[1fr_4fr] gap-8">
         <LeftSideNav />
 
-        <div className="grid md:grid-cols-3 gap-4 mb-6">
+        <div className="grid md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
           {courses.map((course) => (
             <Course key={course.id} course={course} />
           ))}

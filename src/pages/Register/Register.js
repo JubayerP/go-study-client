@@ -6,10 +6,10 @@ import Spinner from "../Spinner/Spinner";
 
 const Register = () => {
   const { createUser, updateUsersProfile, loading, setLoading } = useContext(AuthContext);
-  const navigate = useNavigate();
   const location = useLocation()
+  const navigate = useNavigate();
 
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || "/";
 
   const [userInfo, setUserInfo] = useState({
     fullName: "",
@@ -57,6 +57,7 @@ const Register = () => {
     e.preventDefault();
     createUser(userInfo.email, userInfo.password)
       .then((result) => {
+        navigate(from, { replace: true });
         const user = result.user;
         console.log(user);
         toast.success("You are registerd!", {
@@ -67,7 +68,6 @@ const Register = () => {
           },
         });
         updateUsersProfile(userInfo.fullName, userInfo.photoURL);
-        navigate(from, {replace: true})
       })
       .catch((e) => {
         console.log(e.message);
