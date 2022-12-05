@@ -120,7 +120,7 @@ const Login = () => {
           <input
             onChange={handleEmailChange}
             value={userInfo.email}
-            className="w-[80vh] px-2 py-2.5 border outline-gray-700"
+            className="w-[400px] px-2 py-2.5 border outline-gray-700"
             type="email"
             placeholder="email"
             required
@@ -133,7 +133,7 @@ const Login = () => {
           <input
             onChange={handlePasswordChange}
             value={userInfo.password}
-            className="w-[80vh] px-2 py-2.5 border outline-gray-700"
+            className="w-[400px] px-2 py-2.5 border outline-gray-700"
             type="password"
             placeholder="password"
             required
@@ -141,7 +141,7 @@ const Login = () => {
         </div>
         <button
           type="submit"
-          className="bg-[#FF1F59] w-[80vh] mt-3 py-2.5 text-white font-semibold"
+          className="bg-[#FF1F59] w-[400px] mt-3 py-2.5 text-white font-semibold"
         >
           Login
         </button>
@@ -160,12 +160,12 @@ const Login = () => {
       </div>
 
       <div className="flex justify-center">
-        <button onClick={handleGoogleSignIn} className="flex justify-center items-center w-[80vh] mt-3 py-2.5 font-semibold border border-[#ff1f59] hover:bg-[#ff1f59] hover:text-white duration-100">
+        <button onClick={handleGoogleSignIn} className="flex justify-center items-center w-[400px] mt-3 py-2.5 font-semibold border border-[#ff1f59] hover:bg-[#ff1f59] hover:text-white duration-100">
           <AiFillGoogleCircle size={20} className="mr-2" /> Continue With Google
         </button>
       </div>
       <div className="flex justify-center">
-        <button onClick={handleGithubSignIn} className="flex justify-center items-center w-[80vh] mt-3 py-2.5 font-semibold border border-[#ff1f59] hover:bg-[#ff1f59] hover:text-white duration-100">
+        <button onClick={handleGithubSignIn} className="flex justify-center items-center w-[400px] mt-3 py-2.5 font-semibold border border-[#ff1f59] hover:bg-[#ff1f59] hover:text-white duration-100">
           <AiFillGithub size={20} className="mr-2" /> Continue With Github
         </button>
       </div>
