@@ -1,10 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import toast from 'react-hot-toast';
+import Spinner from "../Spinner/Spinner";
 
 const Register = () => {
-  const { createUser, updateUsersProfile } = useContext(AuthContext);
+  const { createUser, updateUsersProfile, loading, setLoading } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation()
+
+  const from = location.state?.from?.pathname || '/';
 
   const [userInfo, setUserInfo] = useState({
     fullName: "",
@@ -61,9 +66,8 @@ const Register = () => {
             color: "#fff",
           },
         });
-        updateUsersProfile(userInfo.fullName, userInfo.photoURL)
-          .then(() => { })
-        .catch(error => {console.log(error.message)})
+        updateUsersProfile(userInfo.fullName, userInfo.photoURL);
+        navigate(from, {replace: true})
       })
       .catch((e) => {
         console.log(e.message);
@@ -73,9 +77,14 @@ const Register = () => {
             background: '#ED4337',
             color: '#FFF'
           }
-        })
+        });
+        setLoading(false)
       });
   };
+
+  if (loading) {
+    return <Spinner />
+  }
 
   return (
     <div className="mb-4">

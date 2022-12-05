@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const LeftSideNav = () => {
   const [categories, setCategories] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/categories")
+    fetch("https://assignment-10-server-wine.vercel.app/categories")
       .then((res) => res.json())
       .then((data) => setCategories(data));
   }, []);

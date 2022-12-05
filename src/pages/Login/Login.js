@@ -4,11 +4,12 @@ import toast from "react-hot-toast";
 import { AiFillGithub, AiFillGoogleCircle } from "react-icons/ai";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
+import Spinner from '../Spinner/Spinner'
 
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { signIn, providerLogin } = useContext(AuthContext);
+  const { signIn, providerLogin, loading, setLoading } = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -71,6 +72,7 @@ const Login = () => {
             color: "#FFF",
           },
         });
+        setLoading(false);
       });
   };
 
@@ -95,7 +97,12 @@ const Login = () => {
           color: "#FFF",
         },
       });
+      setLoading(false);
     });
+  }
+
+  if (loading) {
+    return <Spinner />
   }
 
   return (

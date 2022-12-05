@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Skills = () => {
   const [skills, setSkills] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/skills")
+    fetch("https://assignment-10-server-wine.vercel.app/skills")
       .then((res) => res.json())
       .then((data) => setSkills(data));
   }, []);
@@ -25,18 +25,19 @@ const Skills = () => {
             </div>
           </div>
         ))}
-
       </div>
-        <div className="flex items-center mb-10 p-6 w-4/5 md:w-1/2 mx-auto bg-[#fff1f4] rounded">
-          <div className="flex md:flex-row flex-col justify-around w-full items-center space-y-5">
-            <h4 className="text-xl font-semibold">
-              Learn specializations from top Courses
-            </h4>
-            <Link to='/courses'><button className="bg-[#ff1f59] py-2.5 px-6 text-lg text-white font-semibold rounded">
+      <div className="flex items-center mb-10 p-6 w-4/5 md:w-1/2 mx-auto bg-[#fff1f4] rounded">
+        <div className="flex md:flex-row flex-col justify-around w-full items-center space-y-5">
+          <h4 className="text-xl font-semibold">
+            Learn specializations from top Courses
+          </h4>
+          <Link to="/courses">
+            <button className="bg-[#ff1f59] py-2.5 px-6 text-lg text-white font-semibold rounded">
               View All Course
-            </button></Link>
-          </div>
+            </button>
+          </Link>
         </div>
+      </div>
     </div>
   );
 };
