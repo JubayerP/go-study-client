@@ -48,6 +48,7 @@ const Login = () => {
             color: "#FFF",
           },
         });
+        setLoading(false);
       });
   };
 
